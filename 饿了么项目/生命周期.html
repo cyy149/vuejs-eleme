@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="js/vue.js" charset="utf-8"></script>
+</head>
+<body>
+    <div id="app">
+        <h3>{{msg}}</h3>
+    </div>
+
+    <button id="btn">销毁组件</button>
+    <script>
+        document.getElementById('btn').onclick = function(){
+            vm.$destroy();
+        }
+
+        var vm = new Vue({
+            el : "#app",
+            data : {
+                msg : 'hello'
+            },
+            beforeCreate : function(){
+                alert('before create');
+            },
+            created : function(){
+                //发起一个异步请求，获取数据，更新msg
+                var _this = this;
+                setTimeout(function(){
+                    _this.msg = 'hi';
+                },5000)
+                alert('created');
+            },
+            beforeMount :function() {
+                alert('before mount');
+            },
+            mounted : function(){
+                alert('mouted');
+            },
+            beforeUpdate :function() {
+                alert('before update');
+            },
+            updated : function(){
+                alert('updated');
+            },
+            beforeDestroy :function() {
+                alert('before destroy');
+            },
+            destroyed : function(){
+                alert('destroyed');
+            },
+        });
+    </script>
+</body>
+</html>

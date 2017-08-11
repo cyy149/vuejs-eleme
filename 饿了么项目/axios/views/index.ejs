@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/style/style.css' />
+    <script src="/js/vue.js"></script>
+    <script src="js/axios.min.js" charset="utf-8"></script>
+  </head>
+  <body>
+    <div id="app">
+        <h1>{{msg}}</h1>
+        <button type="button" @click="getBlog">获取blog数据</button>
+        <ul>
+            <li v-for="item in blogs">
+                <h2><a href="">{{item.title}}</a></h2>
+                <p>{{item.time}}</p>
+                <p>{{item.summary}}</p>
+            </li>
+        </ul>
+    </div>
+
+    <script>
+        var vm = new Vue({
+            el : "#app",
+            data : {
+                msg : "Hello!",
+                blogs : []
+            },
+            methods : {
+                getBlog : function(){
+                    // alert('获取数据啊');
+                    var _this = this;
+                    axios.get("/blog").then(function(response){
+                        console.log(response);
+                        _this.blogs = response.data;
+                    }).catch(function(error){
+                        console.log(error);
+                    });
+                }
+            }
+        });
+    </script>
+  </body>
+</html>

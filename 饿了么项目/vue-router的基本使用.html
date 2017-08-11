@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="js/vue.js" charset="utf-8"></script>
+    <script src="js/vue-router.js"></script>
+    <style>
+        .router-link-active { color: #f00;}
+    </style>
+</head>
+<body>
+    <div id="app">
+        <ul>
+            <li><router-link to="/home">首页面</router-link></li>
+            <li><router-link to="/list">列表页</router-link></li>
+            <li><router-link to="/detail">详情页</router-link></li>
+        </ul>
+        <!-- 占位符 -->
+        <router-view></router-view>
+    </div>
+    <script>
+        //定义组件
+        var Home = {
+            template : '<h2>首页面</h2>'
+        };
+        var List = {
+            template : "<h2>列表页面</h2>"
+        };
+        var Detail = {
+            template : "<h2>详情页面</h2>"
+        };
+        //配置路由
+        var routes = [
+            {
+                path : "/home",
+                component : Home
+            },
+            {
+                path : "/list",
+                component : List
+            },
+            {
+                path : "/detail",
+                component : Detail
+            }
+        ];
+        //实例化一个路由对象
+        var router = new VueRouter({
+            //必须要有一个属性routes，表示路由配置
+            routes : routes
+        });
+
+        var vm = new Vue({
+            el : "#app",
+            data : {
+
+            },
+            //注入路由对象
+            router : router
+        });
+    </script>
+</body>
+</html>
